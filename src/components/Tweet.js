@@ -7,6 +7,7 @@ import {
 } from 'react-icons/ti/index'
 
 import { formatTweet, formatDate } from '../utils/helpers';
+import { handleToggleTweet } from '../actions/tweets';
 
 class Tweet extends Component {
   toParent = (event, id) => {
@@ -17,8 +18,15 @@ class Tweet extends Component {
 
   handleLike = (event) => {
     event.preventDefault();
+    
+    const { dispatch, tweet, authedUser } = this.props;
+    const { id, hasLiked } = tweet;
 
-    // handle like tweet
+    dispatch(handleToggleTweet({
+      id,
+      hasLiked,
+      authedUser
+    }));
   }
 
   render() {
